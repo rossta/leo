@@ -4,7 +4,7 @@ ArtCart = (function() {
       this.painter             = new ArtCart.Painter();
     },
     registerListener: function(type, callback) {
-      if(!this.listenerRegistry) this.listenerRegistry = new ArtCart.ListenerRegistry();
+      if(!this.listenerRegistry) this.listenerRegistry = new ArtCart.CanvasEventRegistry();
       this.listenerRegistry.register(type, callback);
     }
   };
@@ -23,24 +23,27 @@ ArtCart.Base = (function() {
       ArtCart.registerListener("mousedown", this.mouseDown.bindAsEventListener(this));
       ArtCart.registerListener("mousemove", this.mouseMove.bindAsEventListener(this));
       ArtCart.registerListener("mouseup",   this.mouseUp.bindAsEventListener(this));
-      ArtCart.registerListener("mouseout",  this.mouseUp.bindAsEventListener(this));
+      ArtCart.registerListener("mouseout",  this.mouseOut.bindAsEventListener(this));
     },
     mousePosition: function(e) {
       return {left: e.clientX - this.position.left, top: e.clientY - this.position.top};
     },
     mouseDown: function(e) {
-      log.call(this, "Mouse down", this.mousePosition(e));
+      this.log("Mouse down", this.mousePosition(e));
     },
     mouseMove: function(e) {
-      log.call(this, "Mouse move", this.mousePosition(e));
+      this.log("Mouse move", this.mousePosition(e));
     },
     mouseUp: function(e) {
-      log.call(this, "Mouse up", this.mousePosition(e));
+      this.log("Mouse up", this.mousePosition(e));
+    },
+    mouseOut: function(e) {
+      this.log("Mouse up", this.mousePosition(e));
+    },
+    log: function() {
+      console.clear();
+      console.log.call(this, arguments);
     }
-  },
-  log = function() {
-    console.clear();
-    console.log.call(this, arguments);
   };
   
   return publicMethods;

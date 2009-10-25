@@ -1,4 +1,4 @@
-ArtCart.ListenerRegistry = (function() {
+ArtCart.CanvasEventRegistry = (function() {
   var publicMethods = {
     constructor: function() {
       this.canvas    = $("#canvas");
@@ -22,4 +22,4 @@ ArtCart.ListenerRegistry = (function() {
   return publicMethods;
 })();
 
-ArtCart.ListenerRegistry = Base.extend(ArtCart.ListenerRegistry);
+ArtCart.CanvasEventRegistry = Base.extend(ArtCart.CanvasEventRegistry);
