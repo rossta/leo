@@ -4,24 +4,26 @@ ArtCart.Painter = (function() {
       this.base();
       this.startPos   = {left:-1,top:-1};
       this.curPos     = {left:-1,top:-1};
-      this.drawColor  = "rgb(0,0,0)";
+      this.brushColor = "rgb(0,200,200)";
       this.setLineWidth(3);
+      this.registerCanvasListeners("mousedown", "mousemove", "mouseup");
     },
-    mouseDown: function(e) {
+    mousedown: function(e) {
       this.base(e);
       this.startPos = this.mousePosition(e);
       this.context.lineJoin = "round";
-      this.setColor(this.drawColor);
+      this.setColor(this.brushColor);
       this.isMouseDown = true;
     },
-    mouseMove: function(e) {
-      if (this.isMouseDown) {
-        this.curPos = this.mousePosition(e);
-        this.drawPencil(this.startPos, this.curPos, this.context);
-        this.startPos = this.curPos;
-      }
+    mousemove: function(e) {
+      if (!this.isMouseDown) return;
+      this.curPos = this.mousePosition(e);
+      // this.drawLine(this.startPos, this.curPos, this.context);
+      // this.startPos = this.curPos;
+      this.context.clearRect(0,0,400,400);
+      this.drawCircle(this.startPos, this.curPos, this.context);
     },
-    mouseUp: function(e) {
+    mouseup: function(e) {
       if(!this.isMouseDown) return;
       this.curPos = this.mousePosition(e);
       this.isMouseDown = false;
@@ -76,7 +78,7 @@ ArtCart.Painter = (function() {
     setColor: function(color) {
       this.context.fillStyle = color;
       this.context.strokeStyle = color;
-      this.drawColor = color;
+      this.brushColor = color;
     },
 
     setLineWidth: function(lineWidth) {

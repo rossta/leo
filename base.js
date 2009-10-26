@@ -1,48 +1,51 @@
 ArtCart = (function() {
   return {
     init: function() {
-      this.painter             = new ArtCart.Painter();
-    },
-    registerListener: function(type, callback) {
-      if(!this.listenerRegistry) this.listenerRegistry = new ArtCart.CanvasEventRegistry();
-      this.listenerRegistry.register(type, callback);
+      this.painter      = new ArtCart.Painter();
+      this.brushPicker  = new ArtCart.BrushPicker();
     }
   };
 })();
 
 ArtCart.Base = (function() {
   var publicMethods= {
-    constructor: function() {
-      this.canvas         = $("#canvas");
+    constructor: function($canvas) {
+      this.canvas         = $canvas || $("#canvas");
       this.canvasInstance = this.canvas[0];
       this.context        = this.canvasInstance.getContext("2d");
       this.position       = this.canvas.position();
-      this.registerMouseListeners();
-    },
-    registerMouseListeners: function() {
-      ArtCart.registerListener("mousedown", this.mouseDown.bindAsEventListener(this));
-      ArtCart.registerListener("mousemove", this.mouseMove.bindAsEventListener(this));
-      ArtCart.registerListener("mouseup",   this.mouseUp.bindAsEventListener(this));
-      ArtCart.registerListener("mouseout",  this.mouseOut.bindAsEventListener(this));
     },
     mousePosition: function(e) {
       return {left: e.clientX - this.position.left, top: e.clientY - this.position.top};
     },
-    mouseDown: function(e) {
+    mousedown: function(e) {
       this.log("Mouse down", this.mousePosition(e));
     },
-    mouseMove: function(e) {
+    mousemove: function(e) {
       this.log("Mouse move", this.mousePosition(e));
     },
-    mouseUp: function(e) {
+    mouseup: function(e) {
       this.log("Mouse up", this.mousePosition(e));
     },
-    mouseOut: function(e) {
+    mouseout: function(e) {
       this.log("Mouse up", this.mousePosition(e));
+    },
+    click: function(e) {
+      this.log("Click", this.mousePosition(e));
     },
     log: function() {
       console.clear();
-      console.log.call(this, arguments);
+      console.log(arguments);
+    },
+    registerListener: function(type, callback) {
+      this.listenerRegistry.register(type, callback);
+    },
+    registerCanvasListeners: function() {
+      var base = this;
+      this.listenerRegistry = new ArtCart.CanvasEventRegistry(this.canvas, arguments);
+      $.each(arguments, function(i, type) {
+        base.registerListener(type, base[type].bindAsEventListener(base));
+      });
     }
   };
   

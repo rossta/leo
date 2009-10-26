@@ -1,23 +1,25 @@
 ArtCart.CanvasEventRegistry = (function() {
   var publicMethods = {
-    constructor: function() {
-      this.canvas    = $("#canvas");
+    constructor: function($canvas, types) {
+      this.canvas    = $canvas || $("#canvas");
       this.listeners = {};
-      initMouseListeners.call(this);
+      this.initMouseListeners(types);
     },
     register: function(type, callback) {
       if (!this.listeners[type]) this.listeners[type] = new Array();
       this.listeners[type].push(callback);
-    }
-  },
-  initMouseListeners = function() {
-    var listeners = this.listeners, canvas = this.canvas;
-    $.each(["mousedown", "mousemove", "mouseup", "mouseout"], function(i, type) {
-      canvas.bind(type, function(e) {
-        if (!listeners[type] instanceof Array) return;
-        $.each(listeners[type], function(i, callback) { callback(e); });
+    },
+    eventHandler: function(e) {
+      $.each(this.listeners[e.type], function(i, callback) { 
+        callback(e); 
       });
-    });
+    },
+    initMouseListeners: function(types) {
+      var base = this;
+      $.each(types, function(i, type) {
+        base.canvas.bind(type, base.eventHandler.bindAsEventListener(base));
+      });
+    }
   };
   return publicMethods;
 })();

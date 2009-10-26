@@ -1,4 +1,4 @@
-ArtCart.ExtendsBase = (function() {
+ArtCart.ExtendsBase.prototype = (function() {
   var publicMethods = {
     constructor: function() {
       this.base();
@@ -7,4 +7,4 @@ ArtCart.ExtendsBase = (function() {
   return publicMethods;
 })();
 
-ArtCart.ExtendsBase = ArtCart.Base.extend(ArtCart.ExtendsBase);
+ArtCart.ExtendsBase = ArtCart.Base.extend(ArtCart.ExtendsBase.prototype);
