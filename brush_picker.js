@@ -6,9 +6,11 @@ ArtCart.BrushPicker = (function() {
       this.registerCanvasListeners("click");
     },
     click: function(e) {
-      var position = this.mousePosition(e);
-      this.log("click", "index " + Math.floor(position.top / 50), position);
-      // this.notifyObservers(e);
+      var position = this.mousePosition(e),
+          index = Math.floor(position.top / 50);
+      
+      selectBrush.call(this, index);
+      this.notifyObservers(e);
     }
   },
   drawButtons = function() {
@@ -17,8 +19,21 @@ ArtCart.BrushPicker = (function() {
     for (i=0;i<8;i++){
       this.context.strokeRect(0,i*50,50,50);
     }
+  },
+  selectBrush = function(index) {
+    this.brush = ArtCart.BrushPicker.brushes[index];
+    this.log("brush: " + this.brush);
   };
   return publicMethods;
 })();
 
-ArtCart.BrushPicker = ArtCart.Base.extend(ArtCart.BrushPicker);
+ArtCart.BrushPicker = ArtCart.Base.extend(ArtCart.BrushPicker, {
+  BRUSH:  0,
+  PENCIL: 1,
+  CIRCLE: 2,
+  brushes: {
+    0: "BRUSH",
+    1: "PENCIL",
+    2: "CIRCLE"
+  }
+});

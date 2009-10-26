@@ -18,8 +18,9 @@ ArtCart.Painter = (function() {
     mousemove: function(e) {
       if (!this.isMouseDown) return;
       this.curPos = this.mousePosition(e);
-      // this.drawLine(this.startPos, this.curPos, this.context);
-      // this.startPos = this.curPos;
+      this.drawLine(this.startPos, this.curPos, this.context);
+      this.startPos = this.curPos;
+
       this.context.clearRect(0,0,400,400);
       this.drawCircle(this.startPos, this.curPos, this.context);
     },
@@ -87,6 +88,15 @@ ArtCart.Painter = (function() {
 
     getDistance: function(pntFrom, pntTo) {
     	return Math.sqrt(Math.pow(pntFrom.left - pntTo.left,2) + Math.pow(pntFrom.top - pntTo.top,2));
+    },
+    
+    update: function(widget) {
+      this.log("update");
+      if (widget instanceof ArtCart.BrushPicker) {
+        this.log("Brush picker changed");
+      } else {
+        this.log("Something else changed");
+      }
     }
 
   };

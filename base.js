@@ -3,6 +3,8 @@ ArtCart = (function() {
     init: function() {
       this.painter      = new ArtCart.Painter();
       this.brushPicker  = new ArtCart.BrushPicker();
+      
+      this.brushPicker.addObserver(this.painter);
     }
   };
 })();
@@ -14,6 +16,7 @@ ArtCart.Base = (function() {
       this.canvasInstance = this.canvas[0];
       this.context        = this.canvasInstance.getContext("2d");
       this.position       = this.canvas.position();
+      this.observers      = [];
     },
     mousePosition: function(e) {
       return {left: e.clientX - this.position.left, top: e.clientY - this.position.top};
@@ -34,7 +37,7 @@ ArtCart.Base = (function() {
       this.log("Click", this.mousePosition(e));
     },
     log: function() {
-      console.clear();
+      // console.clear();
       console.log(arguments);
     },
     registerListener: function(type, callback) {
@@ -45,6 +48,14 @@ ArtCart.Base = (function() {
       this.listenerRegistry = new ArtCart.CanvasEventRegistry(this.canvas, arguments);
       $.each(arguments, function(i, type) {
         base.registerListener(type, base[type].bindAsEventListener(base));
+      });
+    },
+    update: function() {},
+    addObserver:      function(observer) { this.observers.push(observer); },
+    notifyObservers:  function(e) {
+      var base = this;
+      $.each(base.observers, function(i, observer) {
+        observer.update(base);
       });
     }
   };
