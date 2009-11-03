@@ -1,13 +1,13 @@
 
-= YourLib
+= Art Cart
 
-Description
+Browser paint tools in using javascript with HTML canvas.
 
 == License 
 
 (The MIT License)
 
-Copyright (c) 2009 Your Name <Your Email>
+Copyright (c) 2009 Ross Kaffenberger <rosskaff@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
