@@ -5,6 +5,7 @@ Screw.Unit(function() {
   });
 
   after(function(){
+    cleanFixtures();
   });
   
   describe("ArtCart.Base", function(){
