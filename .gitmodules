@@ -1,0 +1,6 @@
+[submodule "vendor/screw-unit"]
+	path = vendor/screw-unit
+	url = git://github.com/rosskaff/screw-unit.git
+[submodule "vendor/smoke"]
+	path = vendor/smoke
+	url = git://github.com/rosskaff/smoke.git
