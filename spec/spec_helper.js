@@ -5,5 +5,11 @@ var fixture = function(html) {
   $fixture.append($scenario.append(html));
 },
 cleanFixtures = function() {
-  $("#fixture").remove();
+      $("#fixture").remove();
+},
+mockEvent = function(x, y) {
+  mockEvent = Screw.Matchers.mock(Event);
+  if (x) Screw.Matchers.stub(mockEvent, "clientX").and_set_to(x);
+  if (y) Screw.Matchers.stub(mockEvent, "clientY").and_set_to(y);
+  return mockEvent;
 };

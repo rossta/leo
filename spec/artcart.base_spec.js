@@ -4,9 +4,7 @@ Screw.Unit(function() {
     fixture('<canvas id="canvas" width="400" height="400"></canvas><canvas id="brush_picker" width="50" height="400"></canvas>');
   });
 
-  after(function(){
-    cleanFixtures();
-  });
+  after(cleanFixtures);
   
   describe("ArtCart.Base", function(){
     describe("init", function() {

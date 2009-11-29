@@ -1,18 +1,20 @@
 Screw.Unit(function() {
   describe("ArtCart.BrushPicker", function(){
-    describe("select", function(){
+    before(function() {
+      this.brushPicker = new ArtCart.BrushPicker();
+    });
+    after(function() {
+      this.brushPicker.tearDown();
+    });
+    describe("click", function(){
       it("should notify observers", function() {
-        brushPicker = new ArtCart.BrushPicker();
-        clickObserver = {
-          clicked: false,
-          update: function() { this.clicked = true; }
-        };
-        brushPicker.addObserver(clickObserver);
-        brushPicker.click({
-          clientX: 0,
-          clientY: 0
-        });
-        expect(clickObserver.clicked).to(be_true);
+        var observer = mock(Object), mockEvent = mock(Event);
+        observer.should_receive("update").exactly(1, "times");
+        this.brushPicker.addObserver(observer);
+        this.brushPicker.click(mockEvent);
+      });
+      it("should select brush when clicking square 0", function() {
+        
       });
     });
   });
