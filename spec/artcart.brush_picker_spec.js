@@ -7,7 +7,7 @@ Screw.Unit(function() {
 
     after(cleanFixtures);
 
-    describe("init", function() {
+    describe("constructor", function() {
       it("should create brush canvas element", function() {
         var brushPicker = mock(ArtCart.BrushPicker),
             brush = new ArtCart.Brush("Brush");

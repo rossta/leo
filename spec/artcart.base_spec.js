@@ -7,7 +7,7 @@ Screw.Unit(function() {
   after(cleanFixtures);
   
   describe("ArtCart.Base", function(){
-    describe("init", function() {
+    describe("constructor", function() {
       it("should return a new painter", function() {
         ArtCart.init();
         expect(ArtCart.painter instanceof ArtCart.Painter).to(be_true);
