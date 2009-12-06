@@ -2,11 +2,13 @@
 	Base.js, version 1.1a
 	Copyright 2006-2009, Dean Edwards
 	License: http://www.opensource.org/licenses/mit-license.php
+	
+	http://dean.edwards.name/weblog/2006/03/base/
 */
 
 var Base = function() {
 	// dummy
-};
+    };
 
 Base.extend = function(_instance, _static) { // subclass
 	var extend = Base.prototype.extend;

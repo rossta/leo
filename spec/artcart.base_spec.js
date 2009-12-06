@@ -1,11 +1,18 @@
 Screw.Unit(function() {
-
+  var base = load('fixtures/base.html');
+  
   before(function() { 
-    fixture('<canvas id="canvas" width="400" height="400"></canvas><canvas id="brush_picker" width="50" height="400"></canvas>');
+    fixture(base);
   });
 
   after(cleanFixtures);
   
+  describe("spec helper", function(){
+    it("should load fixture file", function() {
+      expect(load("fixtures/foobar.html")).to(equal, "foobar");
+    });
+  });
+
   describe("ArtCart.Base", function(){
     describe("constructor", function() {
       it("should return a new painter", function() {
@@ -14,4 +21,5 @@ Screw.Unit(function() {
       });
     });
   });
+
 });
