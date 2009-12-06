@@ -17,39 +17,43 @@ Screw.Unit(function() {
         var brushPicker = mock(ArtCart.BrushPicker),
             $brushPickerElement = $("#brush_picker");
         brushPicker.stub("menu").and_return($brushPickerElement);
-        
+
         var brush = new ArtCart.Brush("Brush", mock(ArtCart.BrushPicker));
         expect($brushPickerElement).to(contain_selector, "canvas#brush_type_brush");
       });
     });
-    
+
     describe("click", function() {
+
       it("should notify brush picker", function() {
-        var brushPicker = mock(ArtCart.BrushPicker);
-            brush = new ArtCart.Brush("Brush", mock(ArtCart.BrushPicker)),
-        brushPicker.should_receive("update").with_arguments(brush).exactly(1, "times");
+        var brushPicker = new ArtCart.BrushPicker();
+            brush = new ArtCart.Brush("Brush", brushPicker);
+        mock(brushPicker).should_receive("brushChanged").with_arguments(brush).at_least(1, "times");
         brush.click(mockEvent());
       });
+
     });
 
     describe("name", function() {
       it("should return brush name", function() {
-        this.brush = new ArtCart.Brush("Brush");
-        expect(this.brush.name()).to(equal, "Brush");
+        this.brush = new ArtCart.Brush("Brush1");
+        expect(this.brush.name()).to(equal, "Brush1");
       });
     });
   });
 
   describe("ArtCart.BrushPicker", function(){
 
-    describe("update", function(){
-      it("should notify observers", function() {
+    describe("brushChanged", function(){
+      it("should notify observers of new brush", function() {
         var brushPicker = new ArtCart.BrushPicker(),
-            observer = mock(Object), mockEvent = mock(Event);
-        observer.should_receive("update").exactly(1, "times");
+            observer = mock(ArtCart.Base), 
+            brush = mock(ArtCart.Brush);
         brushPicker.addObserver(observer);
-        brushPicker.update(mock(ArtCart.Brush));
+        observer.should_receive("brushChanged").with_arguments(brushPicker, brush).exactly(1, "times");
+        brushPicker.brushChanged(brush);
       });
     });
+
   });
 });
