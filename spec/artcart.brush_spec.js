@@ -42,7 +42,7 @@ Screw.Unit(function() {
       it("should notify observers of new brush", function() {
         var observer = mock(ArtCart.Base);
         this.brushPicker.addObserver(observer);
-        observer.should_receive("brushChanged").with_arguments(this.brushPicker, this.brush).exactly(1, "times");
+        observer.should_receive("brushChanged").with_arguments(this.brush).exactly(1, "times");
         this.brushPicker.brushChanged(this.brush);
       });
     });
