@@ -34,6 +34,35 @@ Screw.Unit(function() {
     });
 
     describe("mousemove", function() {
+      before(function() {
+        this.brush = mock(ArtCart.Brush);
+        this.brush.stub("draw").and_return(true);
+        this.painter.brush = this.brush;
+      });
+
+      after(function() {
+        this.brush = null;
+      });
+
+      it("should not draw if mouse is not pressed", function() {
+        this.brush.should_receive("draw").exactly(0, "times");
+        this.painter.mousemove(mockEvent());
+      });
+      
+      describe("while mouseIsDown", function() {
+        before(function() {
+          this.painter.isMouseDown = true;
+        });
+        
+        after(function() {
+          this.painter.isMouseDown = false;
+        });
+        
+        it("should draw with brush", function() {
+          this.brush.should_receive("draw").exactly(1, "times");
+          this.painter.mousemove(mockEvent());
+        });
+      });
 
     });
 
