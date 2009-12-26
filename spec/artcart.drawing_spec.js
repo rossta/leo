@@ -32,9 +32,19 @@ Screw.Unit(function() {
           ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context);
         });
 
-        it("should fill rect", function() {
+        it("should fill rect if no type specified", function() {
           this.context.should_receive("fillRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
           ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context);
+        });
+
+        it("should fill rect if fill type specified", function() {
+          this.context.should_receive("fillRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
+          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context, 'fill');
+        });
+
+        it("should stroke rect if stroke type specified", function() {
+          this.context.should_receive("strokeRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
+          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context, 'stroke');
         });
 
       });
@@ -72,10 +82,20 @@ Screw.Unit(function() {
           ArtCart.Drawing.circle(this.startPos, this.endPos, this.context);
         });
 
-        it("should fill circle", function() {
+        it("should fill circle if no type specified", function() {
           this.context.should_receive("fill").exactly(1, "times");
           ArtCart.Drawing.circle(this.startPos, this.endPos, this.context);
-          });
+        });
+
+        it("should fill circle if fill type specified", function() {
+          this.context.should_receive("fill").exactly(1, "times");
+          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context, 'fill');
+        });
+
+        it("should stroke circle if stroke type specified", function() {
+          this.context.should_receive("stroke").exactly(1, "times");
+          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context, 'stroke');
+        });
 
       });
 
