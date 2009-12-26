@@ -36,7 +36,47 @@ Screw.Unit(function() {
     });
 
   });
-
+  
+  describe("ArtCart.Draw", function() {
+    before(function() {
+      this.context = mock(Object);
+      this.context.stub("beginPath");
+      this.context.stub("closePath");
+      this.context.stub("fill");
+      this.context.stub("arc");
+      this.startPos = { left: 50, top: 100 };
+      this.endPos   = { left: 150, top: 200 };
+    });
+    after(function(){
+      this.context = null;
+      this.startPos = null;
+      this.endPos   = null;
+    });
+    describe("draw", function() {
+      describe("circle", function() {
+        before(function() {
+          this.drawing = new ArtCart.Draw("Circle", this.startPos, this.endPos, this.context);
+        });
+        it("should begin and close path", function() {
+          this.context.should_receive("beginPath").exactly(1, "times");
+          this.context.should_receive("closePath").exactly(1, "times");
+          this.drawing.draw();
+        });
+        it("should draw arc", function() {
+          var centerX = Math.max(50, 150) - Math.abs(50 - 150)/2,
+              centerY = Math.max(100, 200) - Math.abs(100 - 200)/2,
+              distance = Math.sqrt(Math.pow(50 - 150, 2) + Math.pow(100 - 200, 2));
+          this.context.should_receive("arc").with_arguments(centerX, centerY, distance/2, 0, Math.PI*2, true).exactly(1, "times");
+          this.drawing.draw();
+        });
+        it("should fill circle", function() {
+          this.context.should_receive("fill").exactly(1, "times");
+          this.drawing.draw();
+        });
+      });
+    });
+  });
+  
   describe("ArtCart.BrushPicker", function() {
     describe("brushChanged", function(){
       it("should notify observers of new brush", function() {

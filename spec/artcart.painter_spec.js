@@ -18,7 +18,7 @@ Screw.Unit(function() {
         expect(this.painter.curPos).to(equal, {left:-1,top:-1});
       });
     });
-
+    
     describe('mousedown', function() {
 
       it("should set startPos to mousePosition", function() {
