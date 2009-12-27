@@ -4,7 +4,7 @@ Screw.Unit(function() {
       it("should return position of event relative to self", function() {
         var position = new ArtCart.Position({ left: 50, top: 25 }),
             event = mockEvent(150, 225);
-        expect(position.ofEvent(event)).to(equal, { left: 100, top: 200 });
+        expect(position.ofEvent(event)).to(equal, { left: 100 + window.scrollX, top: 200 + window.scrollY });
       });
     });
   });

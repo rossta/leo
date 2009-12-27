@@ -49,3 +49,7 @@ div.ref-col {
   float: left;
   width: 32%;
 }
+
+canvas:hover {
+  cursor:crosshair;
+}

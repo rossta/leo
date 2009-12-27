@@ -17,7 +17,7 @@ Screw.Unit(function() {
     describe("constructor", function() {
       it("should return a new painter from sandbox", function() {
         ArtCart.init();
-        expect(ArtCart.Sandbox.painter instanceof ArtCart.Painter).to(be_true);
+        expect(ArtCart.painter instanceof ArtCart.Painter).to(be_true);
       });
     });
   });

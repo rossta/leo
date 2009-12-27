@@ -23,7 +23,7 @@ Screw.Unit(function() {
 
       it("should set startPos to mousePosition", function() {
         this.painter.mousedown(mockEvent(100, 200));
-        expect(this.painter.startPos).to(equal, { left: 100, top: 200 });
+        expect(this.painter.startPos).to(equal, { left: 100 + window.scrollX, top: 200 + window.scrollY });
       });
 
       it("should set mousedown state to true", function() {
