@@ -13,11 +13,11 @@ Screw.Unit(function() {
     });
   });
 
-  describe("ArtCart.Base", function(){
+  describe("ArtCart.Core", function(){
     describe("constructor", function() {
       it("should return a new painter from sandbox", function() {
         ArtCart.init();
-        expect(ArtCart.painter instanceof ArtCart.Painter).to(be_true);
+        expect(ArtCart.Core.get("painter") instanceof ArtCart.Painter).to(be_true);
       });
     });
   });
