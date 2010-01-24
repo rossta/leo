@@ -24,21 +24,21 @@ require("../vendor/smoke/plugins/screw.mocking.js");
 require("../vendor/base/base.js");
 
 // Under test
-require("../lib/artcart.js");
-require("../lib/artcart.observable.js");
-require("../lib/artcart.event_handling.js");
-require("../lib/artcart.canvas.js");
-require("../lib/artcart.sandbox.js");
-require("../lib/artcart.logger.js");
-require("../lib/artcart.position.js");
-require("../lib/artcart.drawing.js");
-require("../lib/artcart.painter.js");
-require("../lib/artcart.brush.js");
-require("../lib/artcart.drawing.js");
+require("../lib/ac.js");
+require("../lib/ac.observable.js");
+require("../lib/ac.event_handling.js");
+require("../lib/ac.canvas.js");
+require("../lib/ac.sandbox.js");
+require("../lib/ac.logger.js");
+require("../lib/ac.position.js");
+require("../lib/ac.drawing.js");
+require("../lib/ac.painter.js");
+require("../lib/ac.brush.js");
+require("../lib/ac.drawing.js");
 
 // Specs
-require("artcart.drawing_spec.js");
-require("artcart.painter_spec.js");
-require("artcart.core_spec.js");
-require("artcart.position_spec.js");
-require("artcart.brush_spec.js");
+require("ac.drawing_spec.js");
+require("ac.painter_spec.js");
+require("ac.core_spec.js");
+require("ac.position_spec.js");
+require("ac.brush_spec.js");

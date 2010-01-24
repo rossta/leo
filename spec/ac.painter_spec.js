@@ -3,12 +3,12 @@ Screw.Unit(function() {
 
   before(function(){
     fixture(canvas);
-    this.painter = new ArtCart.Painter();
+    this.painter = new AC.Painter();
   });
 
   after(cleanFixtures);
 
-  describe("ArtCart.Painter", function() {
+  describe("AC.Painter", function() {
 
     describe('constructor', function() {
       it('should initialize startPos off canvas', function() {
@@ -35,7 +35,7 @@ Screw.Unit(function() {
 
     describe("mousemove", function() {
       before(function() {
-        this.brush = mock(ArtCart.Brush);
+        this.brush = mock(AC.Brush);
         this.brush.stub("draw").and_return(true);
         this.painter.brush = this.brush;
       });
@@ -69,8 +69,8 @@ Screw.Unit(function() {
     describe("brushChanged", function() {
 
       it("should update brush", function() {
-        brush2 = mock(ArtCart.BrushPicker);
-        brush2 = mock(ArtCart.Brush);
+        brush2 = mock(AC.BrushPicker);
+        brush2 = mock(AC.Brush);
         this.painter.brush = "brush1";
         this.painter.brushChanged(brush2);
         expect(this.painter.brush).to_not(equal, "brush1");

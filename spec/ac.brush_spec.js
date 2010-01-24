@@ -1,8 +1,8 @@
 Screw.Unit(function() {
   before(function() {
     fixture('<div id="brush_picker"></div>');
-    this.brushPicker = new ArtCart.BrushPicker();
-    this.brush = new ArtCart.Brush("Test");
+    this.brushPicker = new AC.BrushPicker();
+    this.brush = new AC.Brush("Test");
   });
 
   after(function() {
@@ -12,7 +12,7 @@ Screw.Unit(function() {
   });
 
 
-  describe("ArtCart.Brush", function() {
+  describe("AC.Brush", function() {
 
     describe("constructor", function() {
       it("should create brush canvas element", function() {
@@ -37,10 +37,10 @@ Screw.Unit(function() {
 
   });
   
-  describe("ArtCart.BrushPicker", function() {
+  describe("AC.BrushPicker", function() {
     describe("brushChanged", function(){
       it("should notify observers of new brush", function() {
-        var observer = mock(ArtCart.Base);
+        var observer = mock(AC.Base);
         this.brushPicker.addObserver(observer);
         observer.should_receive("brushChanged").with_arguments(this.brush).exactly(1, "times");
         this.brushPicker.brushChanged(this.brush);

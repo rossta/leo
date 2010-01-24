@@ -1,6 +1,6 @@
 Screw.Unit(function() {
 
-  describe("ArtCart.Drawing", function() {
+  describe("AC.Drawing", function() {
 
     before(function() {
       this.context = mock(Object);
@@ -29,22 +29,22 @@ Screw.Unit(function() {
         it("should begin and close path", function() {
           this.context.should_receive("beginPath").exactly(1, "times");
           this.context.should_receive("closePath").exactly(1, "times");
-          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context);
+          AC.Drawing.rectangle(this.startPos, this.endPos, this.context);
         });
 
         it("should fill rect if no type specified", function() {
           this.context.should_receive("fillRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
-          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context);
+          AC.Drawing.rectangle(this.startPos, this.endPos, this.context);
         });
 
         it("should fill rect if fill type specified", function() {
           this.context.should_receive("fillRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
-          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context, 'fill');
+          AC.Drawing.rectangle(this.startPos, this.endPos, this.context, 'fill');
         });
 
         it("should stroke rect if stroke type specified", function() {
           this.context.should_receive("strokeRect").with_arguments(this.startPos.left, this.startPos.top, this.endPos.left - this.startPos.left, this.endPos.top - this.startPos.top).exactly(1, "times");
-          ArtCart.Drawing.rectangle(this.startPos, this.endPos, this.context, 'stroke');
+          AC.Drawing.rectangle(this.startPos, this.endPos, this.context, 'stroke');
         });
 
       });
@@ -54,14 +54,14 @@ Screw.Unit(function() {
         it("should begin and close path", function() {
           this.context.should_receive("beginPath").exactly(1, "times");
           this.context.should_receive("closePath").exactly(1, "times");
-          ArtCart.Drawing.path(this.startPos, this.endPos, this.context);
+          AC.Drawing.path(this.startPos, this.endPos, this.context);
         });
 
         it("should move to, line to and stroke path", function() {
           this.context.should_receive("moveTo").with_arguments(this.startPos.left, this.startPos.top).exactly(1, "times");
           this.context.should_receive("lineTo").with_arguments(this.endPos.left, this.endPos.top).exactly(1, "times");
           this.context.should_receive("stroke");
-          ArtCart.Drawing.path(this.startPos, this.endPos, this.context);
+          AC.Drawing.path(this.startPos, this.endPos, this.context);
         });
 
       });
@@ -71,7 +71,7 @@ Screw.Unit(function() {
         it("should begin and close path", function() {
           this.context.should_receive("beginPath").exactly(1, "times");
           this.context.should_receive("closePath").exactly(1, "times");
-          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context);
+          AC.Drawing.circle(this.startPos, this.endPos, this.context);
         });
 
         it("should draw arc", function() {
@@ -79,22 +79,22 @@ Screw.Unit(function() {
               centerY = Math.max(100, 200) - Math.abs(100 - 200)/2,
               distance = Math.sqrt(Math.pow(50 - 150, 2) + Math.pow(100 - 200, 2));
           this.context.should_receive("arc").with_arguments(centerX, centerY, distance/2, 0, Math.PI*2, true).exactly(1, "times");
-          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context);
+          AC.Drawing.circle(this.startPos, this.endPos, this.context);
         });
 
         it("should fill circle if no type specified", function() {
           this.context.should_receive("fill").exactly(1, "times");
-          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context);
+          AC.Drawing.circle(this.startPos, this.endPos, this.context);
         });
 
         it("should fill circle if fill type specified", function() {
           this.context.should_receive("fill").exactly(1, "times");
-          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context, 'fill');
+          AC.Drawing.circle(this.startPos, this.endPos, this.context, 'fill');
         });
 
         it("should stroke circle if stroke type specified", function() {
           this.context.should_receive("stroke").exactly(1, "times");
-          ArtCart.Drawing.circle(this.startPos, this.endPos, this.context, 'stroke');
+          AC.Drawing.circle(this.startPos, this.endPos, this.context, 'stroke');
         });
 
       });
