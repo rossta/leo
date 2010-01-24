@@ -5,13 +5,13 @@ var load = function(file) {
 
 fixture = function(html) {
   $fixture = $("#fixture");
-  if (!$fixture.length) $fixture = $("<div id='fixture' class='scenarios'></div>").appendTo('body');
-  $scenario = $("<div class='scenario'></div>");
-  $fixture.append($scenario.append(html));
+  if (!$fixture.length) $fixture = $("<div id='fixture' class='scenario'></div>").appendTo('body');
+  $fixture.html(html);
+  return $fixture;
 },
 
 cleanFixtures = function() {
-      $("#fixture").remove();
+  return $("#fixture").empty();
 },
 
 mockEvent = function(x, y) {
@@ -19,4 +19,8 @@ mockEvent = function(x, y) {
   if (x) Screw.Matchers.stub(mockEvent, "clientX").and_set_to(x);
   if (y) Screw.Matchers.stub(mockEvent, "clientY").and_set_to(y);
   return mockEvent;
+},
+
+log = function() {
+  if (window.console) window.console.log.apply(window.console, arguments);
 };

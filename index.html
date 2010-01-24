@@ -4,11 +4,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <link rel="stylesheet" href="stylesheets/main.css"/>
+	<script src="vendor/jquery/jquery-1.4.min.js"></script>
+	<script src="vendor/base/base.js"></script>
+	<script src="lib/leo.js"></script>
 </head>
 <body>
   <h1><a href="#">Leo</a></h1>
-  <h2>Canvas</h2>
-	<script src="vendor/jquery/jquery-1.4.min.js"></script>
-  <script src="vendor/base/base.js"></script>
+  <div class='content'>
+    <h2>Canvas</h2>
+    <div id="leo"></div>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    $(function() { 
+      $("#leo").leonardo();
+    });
+  </script>
 </body>
 </html>

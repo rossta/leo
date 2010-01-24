@@ -1,30 +1,33 @@
-require = function(src) {
-  var element = document.createElement("script");
+var require = function() {
+  var src = "", element = document.createElement("script");
+  for (var i = 0; i < arguments.length; i++) { src += arguments[i]; }
   element.setAttribute("type", "text/javascript");
   element.setAttribute("src", src);
   document.getElementsByTagName("head")[0].appendChild(element);
-};
+},
+
+DIR = { VENDOR: "../vendor/", LIB: "../lib/" };
 
 require('support/spec.js');
 require('support/file_loader.js');
 
 // Test framework
-require("../vendor/screw-unit/lib/screw.builder.js");
-require("../vendor/screw-unit/lib/screw.matchers.js");
-require("../vendor/screw-unit/lib/screw.events.js");
-require("../vendor/screw-unit/lib/screw.behaviors.js");
-require("../vendor/screw-unit/lib/jquery.fn.js");
-require("../vendor/screw-unit/lib/jquery.print.js");
-require("../vendor/smoke/lib/smoke.core.js");
-require("../vendor/smoke/lib/smoke.mock.js");
-require("../vendor/smoke/lib/smoke.stub.js");
-require("../vendor/smoke/plugins/screw.mocking.js");
+require(DIR.VENDOR, "screw-unit/lib/screw.builder.js");
+require(DIR.VENDOR, "screw-unit/lib/screw.matchers.js");
+require(DIR.VENDOR, "screw-unit/lib/screw.events.js");
+require(DIR.VENDOR, "screw-unit/lib/screw.behaviors.js");
+require(DIR.VENDOR, "screw-unit/lib/jquery.fn.js");
+require(DIR.VENDOR, "screw-unit/lib/jquery.print.js");
+require(DIR.VENDOR, "smoke/lib/smoke.core.js");
+require(DIR.VENDOR, "smoke/lib/smoke.mock.js");
+require(DIR.VENDOR, "smoke/lib/smoke.stub.js");
+require(DIR.VENDOR, "smoke/plugins/screw.mocking.js");
 
 // Vendor
-require("../vendor/base/base.js");
+require(DIR.VENDOR, "base/base.js");
 
 // Under test
-require("../lib/leo.js");
+require(DIR.LIB, "leo.js");
 
 // Specs
 require("leo_spec.js");
