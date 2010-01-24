@@ -24,7 +24,21 @@ require("../vendor/smoke/plugins/screw.mocking.js");
 require("../vendor/base/base.js");
 
 // Under test
-require("../lib/leo.js");
+require("../ac.lib/ac.js");
+require("../ac.lib/ac.observable.js");
+require("../ac.lib/ac.event_handling.js");
+require("../ac.lib/ac.canvas.js");
+require("../ac.lib/ac.sandbox.js");
+require("../ac.lib/ac.logger.js");
+require("../ac.lib/ac.position.js");
+require("../ac.lib/ac.drawing.js");
+require("../ac.lib/ac.painter.js");
+require("../ac.lib/ac.brush.js");
+require("../ac.lib/ac.drawing.js");
 
 // Specs
-require("leo_spec.js");
+require("ac.drawing_spec.js");
+require("ac.painter_spec.js");
+require("ac.core_spec.js");
+require("ac.position_spec.js");
+require("ac.brush_spec.js");
