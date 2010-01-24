@@ -2,59 +2,12 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <!-- first we import the jQuery framework -->
-  <script src="../vendor/jquery/jquery-1.3.2.min.js"></script>
-
-  <!-- We import all the files needed by Screw.Unit -->
-  <script src="../vendor/screw-unit/lib/jquery.fn.js"></script>
-  <script src="../vendor/screw-unit/lib/jquery.print.js"></script>
-  <script src="../vendor/screw-unit/lib/screw.builder.js"></script>
-  <script src="../vendor/screw-unit/lib/screw.matchers.js"></script>
-  <script src="../vendor/screw-unit/lib/screw.events.js"></script>
-  <script src="../vendor/screw-unit/lib/screw.behaviors.js"></script>
-
-  <!-- We import all the files needed by Smoke -->
-  <script src="../vendor/smoke/lib/smoke.core.js"></script>
-  <script src="../vendor/smoke/lib/smoke.mock.js"></script>
-  <script src="../vendor/smoke/lib/smoke.stub.js"></script>
-  <script src="../vendor/smoke/plugins/screw.mocking.js"></script>
-
-  <script src="../vendor/base/base.js"></script>
-  <script src="../lib/artcart.js"></script>
-  <script src="../lib/artcart.observable.js"></script>
-  <script src="../lib/artcart.event_handling.js"></script>
-  <script src="../lib/artcart.canvas.js"></script>
-  <script src="../lib/artcart.sandbox.js"></script>
-  <script src="../lib/artcart.logger.js"></script>
-  <script src="../lib/artcart.position.js"></script>
-  <script src="../lib/artcart.drawing.js"></script>
-  <script src="../lib/artcart.painter.js"></script>
-  <script src="../lib/artcart.brush.js"></script>
-  <script src="../lib/artcart.drawing.js"></script>
-
-  <!-- We import all the spec files from the spec/ folder -->
-  <script src="artcart.drawing_spec.js"></script>
-  <script src="artcart.painter_spec.js"></script>
-  <script src="artcart.core_spec.js"></script>
-  <script src="artcart.position_spec.js"></script>
-  <script src="artcart.brush_spec.js"></script>
+  <script src="../vendor/jquery/jquery-1.4.min.js"></script>
   <script src="spec_helper.js"></script>
-
-  <!-- We include the stylesheet from Screw.Unit to have nice looking test results -->
   <link rel="stylesheet" href="../vendor/screw-unit/lib/screw.css">
-
-  <!--
-  We create a class scenario that will hold all the DOM needed for a test suite to work, but hides it from the
-  test HTML
-  -->
   <style>
-    .scenario {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-    }
+    .scenario, .scenarios { position: absolute; left: -9999px; top: 0; }
   </style>
-
   <body>
-    <div id="dom_test" class="scenario"></div>
   </body>
 </html>
