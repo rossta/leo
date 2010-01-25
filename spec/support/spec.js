@@ -16,8 +16,8 @@ cleanFixtures = function() {
 
 mockEvent = function(x, y) {
   var mockEvent = Screw.Matchers.mock(Event);
-  if (x) Screw.Matchers.stub(mockEvent, "clientX").and_set_to(x);
-  if (y) Screw.Matchers.stub(mockEvent, "clientY").and_set_to(y);
+  if (x) Screw.Matchers.stub(mockEvent, "pageX").and_set_to(x);
+  if (y) Screw.Matchers.stub(mockEvent, "pageY").and_set_to(y);
   return mockEvent;
 },
 
