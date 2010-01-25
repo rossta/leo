@@ -23,9 +23,9 @@ Screw.Unit(function() {
         expect($("#leo")).to(contain_selector, 'canvas');
       });
 
-      it("should create a new Leo.Canvas", function() {
+      it("should create a new Leo.View", function() {
         var leo = Leo.init();
-        expect(leo.module('canvas')).to(be_instance_of, Leo.Canvas);
+        expect(leo.module('view')).to(be_instance_of, Leo.View);
       });
 
     });

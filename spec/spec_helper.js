@@ -28,8 +28,11 @@ require(DIR.VENDOR, "base/base.js");
 
 // Under test
 require(DIR.LIB, "leo.js");
-require(DIR.LIB, "leo.canvas.js");
+require(DIR.LIB, "leo.view.js");
+require(DIR.LIB, "leo.handlers.js");
+require(DIR.LIB, "leo.graphics.js");
 
 // Specs
-require("leo.canvas.spec.js");
+require("leo.graphics.spec.js");
+require("leo.view.spec.js");
 require("leo.spec.js");
