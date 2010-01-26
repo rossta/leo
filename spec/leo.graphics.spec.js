@@ -56,8 +56,12 @@ Screw.Unit(function() {
     });
     
     describe("#containsPoint", function() {
+      before(function() {
+        T.rect = new Leo.Rectangle(10, 20, 10, 20);
+      });
+
       it("should return true if point within rectangle", function() {
-        var rect = new Leo.Rectangle(10, 20, 10, 20);
+        var rect = T.rect;
         expect(rect.containsPoint(10, 20)).to(be_true);
         expect(rect.containsPoint(19, 20)).to(be_true);
         expect(rect.containsPoint(19, 39)).to(be_true);
@@ -66,13 +70,37 @@ Screw.Unit(function() {
       });
       
       it("should return false if point outside rectangle", function() {
-        var rect = new Leo.Rectangle(10, 20, 10, 20);
+        var rect = T.rect;
         expect(rect.containsPoint(9, 21)).to(be_false);
-        expect(rect.containsPoint(21, 41)).to(be_false);
-        expect(rect.containsPoint(9, 41)).to(be_false);
+        expect(rect.containsPoint(21, 40)).to(be_false);
+        expect(rect.containsPoint(9, 40)).to(be_false);
         expect(rect.containsPoint(20, 20)).to(be_false);
+        expect(rect.containsPoint(20, 40)).to(be_false);
       });
     }),
+    
+    describe("#contains", function() {
+      before(function() {
+        T.rect = new Leo.Rectangle(10, 20, 10, 20);
+      });
+
+      it("should return true if other rectangle within rectangle", function() {
+        var rect = T.rect;
+        expect(rect.contains(new Leo.Rectangle(10, 20, 9, 19))).to(be_true);
+        expect(rect.contains(new Leo.Rectangle(11, 20, 8, 19))).to(be_true);
+        expect(rect.contains(new Leo.Rectangle(10, 21, 9, 18))).to(be_true);
+        expect(rect.contains(new Leo.Rectangle(11, 21, 8, 18))).to(be_true);
+      });
+      
+      it("should return false if other rectangle outside rectangle", function() {
+        var rect = T.rect;
+        expect(rect.containsPoint(new Leo.Rectangle(10, 20, 10, 20))).to(be_false);
+        expect(rect.containsPoint(new Leo.Rectangle(11, 20, 8, 20))).to(be_false);
+        expect(rect.containsPoint(new Leo.Rectangle(10, 21, 8, 19))).to(be_false);
+        expect(rect.containsPoint(new Leo.Rectangle(10, 21, 8, 18))).to(be_false);
+      });
+      
+    });
 
     describe("#union", function() {
       before(function() {
