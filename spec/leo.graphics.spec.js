@@ -29,21 +29,8 @@ Screw.Unit(function() {
         expect(rect.save()).to(equal, { x: 2, y: 4, width: 100, height: 300 });
       });
     });
-    
+
     describe("#unionPoint", function() {
-      // if (x < this.x) {
-      //   this.width += this.x - x;
-      //   this.x = x;
-      // } else if (x > this.x + this.width) {
-      //   this.width = x - this.x;
-      // }
-      // 
-      // if (y < this.y) {
-      //   this.height += this.y - y;
-      //   this.y = y;
-      // } else if (y > this.y + this.height) {
-      //   this.height = y - this.y;
-      // }
       before(function() {
         T.rect = new Leo.Rectangle(10, 20, 10, 20);
       });
@@ -67,6 +54,25 @@ Screw.Unit(function() {
         expect(T.rect.unionPoint(10, 45).height).to(equal, 25);
       });
     });
+    
+    describe("#containsPoint", function() {
+      it("should return true if point within rectangle", function() {
+        var rect = new Leo.Rectangle(10, 20, 10, 20);
+        expect(rect.containsPoint(10, 20)).to(be_true);
+        expect(rect.containsPoint(19, 20)).to(be_true);
+        expect(rect.containsPoint(19, 39)).to(be_true);
+        expect(rect.containsPoint(10, 39)).to(be_true);
+        expect(rect.containsPoint(15, 30)).to(be_true);
+      });
+      
+      it("should return false if point outside rectangle", function() {
+        var rect = new Leo.Rectangle(10, 20, 10, 20);
+        expect(rect.containsPoint(9, 21)).to(be_false);
+        expect(rect.containsPoint(21, 41)).to(be_false);
+        expect(rect.containsPoint(9, 41)).to(be_false);
+        expect(rect.containsPoint(20, 20)).to(be_false);
+      });
+    }),
 
     describe("#union", function() {
       before(function() {
