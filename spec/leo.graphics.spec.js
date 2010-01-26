@@ -28,7 +28,44 @@ Screw.Unit(function() {
         var rect = new Leo.Rectangle(2, 4, 100, 300);
         expect(rect.save()).to(equal, { x: 2, y: 4, width: 100, height: 300 });
       });
+    });
+    
+    describe("#unionPoint", function() {
+      // if (x < this.x) {
+      //   this.width += this.x - x;
+      //   this.x = x;
+      // } else if (x > this.x + this.width) {
+      //   this.width = x - this.x;
+      // }
+      // 
+      // if (y < this.y) {
+      //   this.height += this.y - y;
+      //   this.y = y;
+      // } else if (y > this.y + this.height) {
+      //   this.height = y - this.y;
+      // }
+      before(function() {
+        T.rect = new Leo.Rectangle(10, 20, 10, 20);
+      });
 
+      it("should expand width and reset x if x < this.x", function() {
+        expect(T.rect.unionPoint(5, 20).width).to(equal, 15);
+        expect(T.rect.unionPoint(5, 20).x).to(equal, 5);
+      });
+
+      it("should set with to difference if x > this.x + this.width", function() {
+        expect(T.rect.unionPoint(25, 20).width).to(equal, 15);
+      });
+
+      it("should expand height and reset y if y < this.y", function() {
+        var unionPoint = T.rect.unionPoint(10, 15);
+        expect(unionPoint.height).to(equal, 25);
+        expect(unionPoint.y).to(equal, 15);
+      });
+
+      it("should set with to difference if y > this.y + this.height", function() {
+        expect(T.rect.unionPoint(10, 45).height).to(equal, 25);
+      });
     });
 
     describe("#union", function() {
