@@ -54,7 +54,7 @@ Screw.Unit(function() {
         expect(T.rect.unionPoint(10, 45).height).to(equal, 25);
       });
     });
-    
+
     describe("#containsPoint", function() {
       before(function() {
         T.rect = new Leo.Rectangle(10, 20, 10, 20);
@@ -68,7 +68,7 @@ Screw.Unit(function() {
         expect(rect.containsPoint(10, 39)).to(be_true);
         expect(rect.containsPoint(15, 30)).to(be_true);
       });
-      
+
       it("should return false if point outside rectangle", function() {
         var rect = T.rect;
         expect(rect.containsPoint(9, 21)).to(be_false);
@@ -78,7 +78,15 @@ Screw.Unit(function() {
         expect(rect.containsPoint(20, 40)).to(be_false);
       });
     });
-    
+
+    describe("self.create", function() {
+      var attrs = { x: 4, y: 5, width: 6, height: 7 }, r = Leo.Rectangle.create(attrs);
+      expect(r.x).to(equal, 4);
+      expect(r.y).to(equal, 5);
+      expect(r.width).to(equal, 6);
+      expect(r.height).to(equal, 7);
+    });
+
     describe("#contains", function() {
       before(function() {
         T.rect = new Leo.Rectangle(10, 20, 10, 20);
@@ -91,7 +99,7 @@ Screw.Unit(function() {
         expect(rect.contains(new Leo.Rectangle(10, 21, 9, 18))).to(be_true);
         expect(rect.contains(new Leo.Rectangle(11, 21, 8, 18))).to(be_true);
       });
-      
+
       it("should return false if other rectangle outside rectangle", function() {
         var rect = T.rect;
         expect(rect.containsPoint(new Leo.Rectangle(10, 20, 10, 20))).to(be_false);
@@ -99,7 +107,7 @@ Screw.Unit(function() {
         expect(rect.containsPoint(new Leo.Rectangle(10, 21, 8, 19))).to(be_false);
         expect(rect.containsPoint(new Leo.Rectangle(10, 21, 8, 18))).to(be_false);
       });
-      
+
     });
 
     describe("#union", function() {
@@ -148,7 +156,7 @@ Screw.Unit(function() {
       });
     });
   });
-  
+
   describe("Leo.IdentityMatrix", function() {
     it("should define m11, m12, m21, m22, dx, and dy", function() {
       var m = new Leo.IdentityMatrix();
@@ -159,14 +167,27 @@ Screw.Unit(function() {
       expect(m.dx).to(equal, 0);
       expect(m.dy).to(equal, 0);
     });
-    
+
+    describe("self.create", function() {
+      it('should create a new identity matrix from given attributes', function(){
+        var attrs = { m11: 1, m12: 2, m21: 3, m22: 4, dx: 5, dy:6 },
+        m = Leo.IdentityMatrix.create(attrs);
+        expect(m.m11).to(equal, 1);
+        expect(m.m12).to(equal, 2);
+        expect(m.m21).to(equal, 3);
+        expect(m.m22).to(equal, 4);
+        expect(m.dx).to(equal, 5);
+        expect(m.dy).to(equal, 6);
+      });
+    });
+
     describe("#save", function() {
       it("should return { m11: this.m11, m12: this.m12, m21: this.m21, m22: this.m22, dx: this.dx, dy:this.dy }", function() {
         var m = new Leo.IdentityMatrix();
         expect(m.save()).to(equal, { m11: m.m11, m12: m.m12, m21: m.m21, m22: m.m22, dx: m.dx, dy:m.dy });
       });
     });
-    
+
     describe("#multiply", function() {
       var m = new Leo.IdentityMatrix(), o = new Leo.IdentityMatrix();
       o.m11 = 2; o.m12 = 3; o.m21 = 4; o.m22 = 5; o.dx = 6; o.dy = 7;
@@ -178,7 +199,7 @@ Screw.Unit(function() {
       expect(n.dx).to(equal, 6);
       expect(n.dy).to(equal, 7);
     });
-    
+
     describe("#apply", function() {
       it("should return point with given coordinates applied to matrix", function() {
         var m = new Leo.IdentityMatrix(),
