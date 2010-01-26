@@ -31,8 +31,10 @@ require(DIR.LIB, "leo.js");
 require(DIR.LIB, "leo.view.js");
 require(DIR.LIB, "leo.handlers.js");
 require(DIR.LIB, "leo.graphics.js");
+require(DIR.LIB, "leo.nodes.js");
 
 // Specs
+require("leo.nodes.spec.js");
 require("leo.graphics.spec.js");
 require("leo.view.spec.js");
 require("leo.spec.js");
