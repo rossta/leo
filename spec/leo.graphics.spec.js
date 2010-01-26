@@ -77,7 +77,7 @@ Screw.Unit(function() {
         expect(rect.containsPoint(20, 20)).to(be_false);
         expect(rect.containsPoint(20, 40)).to(be_false);
       });
-    }),
+    });
     
     describe("#contains", function() {
       before(function() {
@@ -145,6 +145,46 @@ Screw.Unit(function() {
 
         expect(T.rect.width).to(equal, expectedWidth);
         expect(T.rect.x).to(equal, expectedX);
+      });
+    });
+  });
+  
+  describe("Leo.IdentityMatrix", function() {
+    it("should define m11, m12, m21, m22, dx, and dy", function() {
+      var m = new Leo.IdentityMatrix();
+      expect(m.m11).to(equal, 1);
+      expect(m.m12).to(equal, 0);
+      expect(m.m21).to(equal, 0);
+      expect(m.m22).to(equal, 1);
+      expect(m.dx).to(equal, 0);
+      expect(m.dy).to(equal, 0);
+    });
+    
+    describe("#save", function() {
+      it("should return { m11: this.m11, m12: this.m12, m21: this.m21, m22: this.m22, dx: this.dx, dy:this.dy }", function() {
+        var m = new Leo.IdentityMatrix();
+        expect(m.save()).to(equal, { m11: m.m11, m12: m.m12, m21: m.m21, m22: m.m22, dx: m.dx, dy:m.dy });
+      });
+    });
+    
+    describe("#multiply", function() {
+      var m = new Leo.IdentityMatrix(), o = new Leo.IdentityMatrix();
+      o.m11 = 2; o.m12 = 3; o.m21 = 4; o.m22 = 5; o.dx = 6; o.dy = 7;
+      n = m.multiply(o);
+      expect(n.m11).to(equal, 2);
+      expect(n.m12).to(equal, 3);
+      expect(n.m21).to(equal, 4);
+      expect(n.m22).to(equal, 5);
+      expect(n.dx).to(equal, 6);
+      expect(n.dy).to(equal, 7);
+    });
+    
+    describe("#apply", function() {
+      it("should return point with given coordinates applied to matrix", function() {
+        var m = new Leo.IdentityMatrix(),
+            point = m.apply(4, 8);
+        expect(point.x).to(equal, (m.m11 * 4 + m.m12 * 8 + m.dx));
+        expect(point.y).to(equal, (m.m21 * 4 + m.m22 * 8 + m.dy));
       });
     });
   });
