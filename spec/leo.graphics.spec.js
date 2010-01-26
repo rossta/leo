@@ -209,4 +209,53 @@ Screw.Unit(function() {
       });
     });
   });
+  
+  describe("Leo.ScaleMatrix", function() {
+
+    it("should scale identity matrix m11, m22 based on sx, sy", function() {
+      var sx = 3, sy = 4, s = new Leo.ScaleMatrix(sx, sy);
+
+      expect(s.m11).to(equal, 3);
+      expect(s.m12).to(equal, 0);
+      expect(s.m21).to(equal, 0);
+      expect(s.m22).to(equal, 4);
+      expect(s.dx).to(equal, 0);
+      expect(s.dy).to(equal, 0);
+    });
+    
+    it("should adjust deltas based on secondary params ox, oy", function() {
+
+      var sx = 3, sy = 4, ox = 5, oy = 6, s = new Leo.ScaleMatrix(sx, sy, ox, oy);
+      expect(s.m11).to(equal, 3);
+      expect(s.m12).to(equal, 0);
+      expect(s.m21).to(equal, 0);
+      expect(s.m22).to(equal, 4);
+      expect(s.dx).to(equal, (ox - sx * ox));
+      expect(s.dy).to(equal, (oy - sy * oy));
+    });
+  });
+
+  describe("Leo.RotateMatrix", function() {
+    it("should scale identity matrix m11, m22 based on sx, sy", function() {
+      var angle = 45, x = 30, y = 60, s = new Leo.RotateMatrix(angle, x, y);
+      expect(s.m11).to(equal, Math.cos(angle));
+      expect(s.m12).to(equal, Math.sin(angle));
+      expect(s.m21).to(equal, -Math.sin(angle));
+      expect(s.m22).to(equal, Math.cos(angle));
+      expect(s.dx).to(equal, (-x * Math.cos(angle) - y * Math.sin(angle) + x));
+      expect(s.dy).to(equal, (x * Math.sin(angle) - y * Math.cos(angle) + y));
+    });
+  });
+  
+  describe("Leo.TranslateMatrix", function() {
+    it("should set deltas", function() {
+      var dx = 3, dy = 4, t = new Leo.TranslateMatrix(dx, dy);
+      expect(t.m11).to(equal, 1);
+      expect(t.m12).to(equal, 0);
+      expect(t.m21).to(equal, 0);
+      expect(t.m22).to(equal, 1);
+      expect(t.dx).to(equal, dx);
+      expect(t.dy).to(equal, dy);
+    });
+  });
 });
