@@ -24,6 +24,7 @@ require(DIR.VENDOR, "smoke/lib/smoke.stub.js");
 require(DIR.VENDOR, "smoke/plugins/screw.mocking.js");
 
 // Vendor
+require(DIR.VENDOR, "underscore/underscore.js");
 require(DIR.VENDOR, "base/base.js");
 
 // Under test
