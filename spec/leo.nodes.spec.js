@@ -1,10 +1,25 @@
 Screw.Unit(function() {
 
+  describe("Leo.PathNode", function() {
+    it("should have sx, sy, dx, dy, segments, closed, points, shadow", function() {
+      var node = new Leo.PathNode(5, 6);
+      expect(node.sx).to(equal, 5);
+      expect(node.sy).to(equal, 6);
+      expect(node.dx).to(equal, 5);
+      expect(node.dy).to(equal, 6);
+      expect(node.segments).to(equal, []);
+      expect(node.points).to(equal, []);
+      expect(node.closed).to(equal, false);
+      expect(node.shadow).to(equal, false);
+    });
+  });
+
   describe("Leo.Node", function() {
-    it("should have id(TBD), rectangle, matrix, strokeStyle, fillStyle, lineWidth, parent, children", function() {
+    it("should have id(TBD), type, rectangle, matrix, strokeStyle, fillStyle, lineWidth, parent, children", function() {
       var node = new Leo.Node();
       expect(node.rect).to(be_instance_of, Leo.Rectangle);
       expect(node.matrix).to(be_instance_of, Leo.IdentityMatrix);
+      expect(node.type).to(equal, "Node");
       expect(node.strokeStyle).to(equal, "#000000");
       expect(node.fillStyle).to(equal, "#FFFFFF");
       expect(node.lineWidth).to(equal, 2);
@@ -50,7 +65,7 @@ Screw.Unit(function() {
         expect(root.children).to(have_length, 1);
       });
     });
-    
+
     describe("#transform", function() {
       it("should apply a new matrix to the node", function() {
         var node = new Leo.Node(), matrix = mock(Leo.IdentityMatrix);
@@ -58,7 +73,7 @@ Screw.Unit(function() {
         node.transform(matrix);
       });
     });
-    
+
     describe("#draw", function() {
       it("should draw children recursively", function() {
         var node = new Leo.Node(), child = mock(Leo.Node), context = mock(Object);
