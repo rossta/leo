@@ -32,20 +32,6 @@ Screw.Unit(function() {
     });
 
     describe("#load", function() {
-      // this.matrix = IdentityMatrix.load(s.matrix);
-      // this.strokeStyle = s.strokeStyle;
-      // this.fillStyle = s.fillStyle;
-      // this.lineWidth = s.lineWidth;
-      //
-      // this.children.length = 0;
-      //
-      // for ( var i = 0; i < s.children.length; i++ ) {
-      //   var node = new Leo[s.type]();
-      //   node.load(s);
-      //   node.parent = this;
-      //   this.children.push(node);
-      // }
-      // return this;
       it("should set values from given node and load given nodes children", function() {
         var root = new Leo.Node(), s = {}, child = { type: "Node", children: [] };
         s.type = "Node";
@@ -55,7 +41,13 @@ Screw.Unit(function() {
         s.lineWidth = 1;
         s.children = [child];
         mock(Leo.IdentityMatrix).stub("load").and_return("matrix");
-        expect(root.load(s)).to(be_instance_of, Leo.Node);
+        root.load(s);
+        expect(root).to(be_instance_of, Leo.Node);
+        expect(root.matrix).to(equal, "matrix");
+        expect(root.strokeStyle).to(equal, "#CCCCCC");
+        expect(root.fillStyle).to(equal, "#EFEFEF");
+        expect(root.lineWidth).to(equal, 1);
+        expect(root.children).to(have_length, 1);
       });
     });
   });
