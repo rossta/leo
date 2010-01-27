@@ -61,10 +61,19 @@ Screw.Unit(function() {
     
     describe("#draw", function() {
       it("should draw children recursively", function() {
+        var node = new Leo.Node(), child = mock(Leo.Node), context = mock(Object);
+        node.children = [ child ];
+        child.should_receive("draw").with_arguments(context).exactly("once");
+        node.draw(context);
+      });
+    });
+
+    describe("#format", function() {
+      it("should format children recursively", function() {
         var node = new Leo.Node(), child = mock(Leo.Node);
         node.children = [ child ];
-        child.should_receive("draw").exactly("once");
-        node.draw();
+        child.should_receive("format").exactly("once");
+        node.format();
       });
     });
   });
