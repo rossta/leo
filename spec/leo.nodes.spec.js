@@ -50,6 +50,23 @@ Screw.Unit(function() {
         expect(root.children).to(have_length, 1);
       });
     });
+    
+    describe("#transform", function() {
+      it("should apply a new matrix to the node", function() {
+        var node = new Leo.Node(), matrix = mock(Leo.IdentityMatrix);
+        matrix.should_receive("multiply").with_arguments(node.matrix).exactly("once");
+        node.transform(matrix);
+      });
+    });
+    
+    describe("#draw", function() {
+      it("should draw children recursively", function() {
+        var node = new Leo.Node(), child = mock(Leo.Node);
+        node.children = [ child ];
+        child.should_receive("draw").exactly("once");
+        node.draw();
+      });
+    });
   });
 
 });
