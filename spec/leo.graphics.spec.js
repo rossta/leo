@@ -79,8 +79,8 @@ Screw.Unit(function() {
       });
     });
 
-    describe("self.create", function() {
-      var attrs = { x: 4, y: 5, width: 6, height: 7 }, r = Leo.Rectangle.create(attrs);
+    describe("self.load", function() {
+      var attrs = { x: 4, y: 5, width: 6, height: 7 }, r = Leo.Rectangle.load(attrs);
       expect(r.x).to(equal, 4);
       expect(r.y).to(equal, 5);
       expect(r.width).to(equal, 6);
@@ -168,10 +168,10 @@ Screw.Unit(function() {
       expect(m.dy).to(equal, 0);
     });
 
-    describe("self.create", function() {
-      it('should create a new identity matrix from given attributes', function(){
+    describe("self.load", function() {
+      it('should load a new identity matrix from given attributes', function(){
         var attrs = { m11: 1, m12: 2, m21: 3, m22: 4, dx: 5, dy:6 },
-        m = Leo.IdentityMatrix.create(attrs);
+        m = Leo.IdentityMatrix.load(attrs);
         expect(m.m11).to(equal, 1);
         expect(m.m12).to(equal, 2);
         expect(m.m21).to(equal, 3);
