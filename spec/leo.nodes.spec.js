@@ -1,5 +1,23 @@
 Screw.Unit(function() {
-
+  
+  describe("Leo.PathSegment", function() {
+    it("should have type, x, y, r, x1, y1", function() {
+      var segment = new Leo.PathSegment({
+        type: "curve",
+        x: 1,
+        y: 2,
+        r: 3,
+        x1: 4,
+        y1: 5
+      });
+      expect(segment.x).to(equal, 1);
+      expect(segment.y).to(equal, 2);
+      expect(segment.r).to(equal, 3);
+      expect(segment.x1).to(equal, 4);
+      expect(segment.y1).to(equal, 5);
+    });
+  });
+  
   describe("Leo.PathNode", function() {
     it("should have sx, sy, dx, dy, segments, closed, points, shadow", function() {
       var node = new Leo.PathNode(5, 6);
