@@ -53,6 +53,45 @@ Screw.Unit(function() {
         });
       });
     });
+    
+    describe("#load", function() {
+      it("should create path node from json and load children", function() {
+        var node = new Leo.PathNode(), child = { type: "Node", children: [] },
+        segment = { type: "curve" };
+        s = {
+          type: "PathNode",
+          matrix: "matrix",
+          strokeStyle: "#CCCCCC",
+          fillStyle: "#EFEFEF",
+          lineWidth: 1,
+          children: [child],
+          sx: 2,
+          sy: 3,
+          dx: 2,
+          dy: 3,
+          closed: true,
+          shadow: true,
+          segments: [segment]
+        };
+
+        mock(Leo.PathSegment).stub("load").and_return("segment");
+        mock(Leo.IdentityMatrix).stub("load").and_return("matrix");
+        node.load(s);
+        expect(node).to(be_instance_of, Leo.PathNode);
+        expect(node.matrix).to(equal, "matrix");
+        expect(node.strokeStyle).to(equal, "#CCCCCC");
+        expect(node.fillStyle).to(equal, "#EFEFEF");
+        expect(node.lineWidth).to(equal, 1);
+        expect(node.children).to(have_length, 1);
+        expect(node.sx).to(equal, 2);
+        expect(node.sy).to(equal, 3);
+        expect(node.dx).to(equal, 2);
+        expect(node.dy).to(equal, 3);
+        expect(node.closed).to(be_true);
+        expect(node.shadow).to(be_true);
+        expect(node.segments).to(equal, ["segment"]);
+      });
+    });
   });
 
   describe("Leo.Node", function() {
@@ -88,7 +127,7 @@ Screw.Unit(function() {
     });
 
     describe("#load", function() {
-      it("should set values from given node and load given nodes children", function() {
+      it("should create node from json and load children", function() {
         var root = new Leo.Node(), s = {}, child = { type: "Node", children: [] };
         s.type = "Node";
         s.matrix = "matrix";
