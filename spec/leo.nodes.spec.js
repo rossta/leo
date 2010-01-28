@@ -11,6 +11,47 @@ Screw.Unit(function() {
       expect(node.points).to(equal, []);
       expect(node.closed).to(equal, false);
       expect(node.shadow).to(equal, false);
+      expect(node.type).to(equal, "PathNode");
+    });
+    
+    it("should have inherit base class node properties as well", function() {
+      var node = new Leo.PathNode();
+      expect(node.rect).to(be_instance_of, Leo.Rectangle);
+      expect(node.matrix).to(be_instance_of, Leo.IdentityMatrix);
+      expect(node.strokeStyle).to(equal, "#000000");
+      expect(node.fillStyle).to(equal, "#FFFFFF");
+      expect(node.lineWidth).to(equal, 2);
+      expect(node.parent).to(be_null);
+      expect(node.children).to(equal, []);
+    });
+    
+    describe("#save", function() {
+      it("should return a json object of node properties", function() {
+        var node = new Leo.PathNode(2,3),
+        child = mock({}),
+        seg1 = mock({}),
+        matrix = mock(node.matrix);
+        node.children = [child];
+        node.segments = [seg1];
+        matrix.stub("save").and_return("matrix");
+        child.stub("save").and_return("child");
+        seg1.should_receive("save").exactly("once").and_return("segment");
+        expect(node.save()).to(equal, {
+          type: "PathNode",
+          matrix: "matrix",
+          strokeStyle: "#000000",
+          fillStyle: "#FFFFFF",
+          lineWidth: 2,
+          children: ["child"],
+          sx: 2,
+          sy: 3,
+          dx: 2,
+          dy: 3,
+          closed: false,
+          shadow: false,
+          segments: ["segment"]
+        });
+      });
     });
   });
 
