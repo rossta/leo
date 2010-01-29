@@ -43,6 +43,23 @@ Screw.Unit(function() {
       expect(node.children).to(equal, []);
     });
     
+    describe("#lineTo", function() {
+      it("should add segment to node with given x, y", function() {
+        var node = new Leo.PathNode(1, 2);
+        node.lineTo(3, 4);
+        expect(node.segments).to(have_length, 1);
+        expect(node.segments[0].x).to(equal, 3);
+        expect(node.segments[0].y).to(equal, 4);
+      });
+    });
+    
+    describe("#close", function() {
+      it("should set node to closed", function() {
+        var node = new Leo.PathNode();
+        expect(node.close().closed).to(be_true);
+      });
+    });
+    
     describe("#save", function() {
       it("should return a json object of node properties", function() {
         var node = new Leo.PathNode(2,3),
@@ -189,6 +206,7 @@ Screw.Unit(function() {
         node.format();
       });
     });
+    
   });
 
 });
