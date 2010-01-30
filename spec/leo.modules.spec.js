@@ -21,6 +21,11 @@ Screw.Unit(function() {
     });
     
     describe("constructor", function() {
+      it("should have leo, handler, buttons", function(){
+        expect(T.toolbar.leo).to(equal, T.leo);
+        expect(T.toolbar.handler).to(be_instance_of, Leo.Handler);
+        expect(T.toolbar.buttons).to(be_empty);
+      });
       it("should append toolbar to leo", function() {
         expect(T.leo.container).to(contain_selector, "#leo_toolbar");
       });
@@ -61,6 +66,7 @@ Screw.Unit(function() {
 
         before(function() {
           mock(T.view).stub("position").and_return({ top: 100, left: 200 });
+          T.view.init();
         });
 
         it("should notify leo of events: click dblclick mousemove mousedown mouseup keyup keydown", function() {
