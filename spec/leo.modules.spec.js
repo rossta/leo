@@ -14,10 +14,16 @@ Screw.Unit(function() {
 
   describe("Leo.Toolbar", function() {
     before(function() {
-      T.toolbar = new Leo.Toolbar();
+      T.toolbar = new Leo.Toolbar(T.leo);
     });
     after(function() {
       T.toolbar = null;
+    });
+    
+    describe("constructor", function() {
+      it("should append toolbar to leo", function() {
+        expect(T.leo.container).to(contain_selector, "#leo_toolbar");
+      });
     });
 
     describe("self.create", function() {
@@ -29,17 +35,19 @@ Screw.Unit(function() {
   });
 
   describe("Leo.View", function() {
-    
+
     describe("classMethods", function() {
 
       describe("self.create", function() {
+
         it("should return a new Leo.View", function() {
           expect(Leo.View.create(T.leo)).to(be_instance_of, Leo.View);
         });
+
       });
 
     });
-    
+
     describe("instanceMethods", function() {
       before(function() {
         T.view = new Leo.View(T.leo);
@@ -71,13 +79,13 @@ Screw.Unit(function() {
       describe("#position", function() {
 
         it("should return position of canvas", function() {
-          expect(T.view.position()).to(equal, { top: 0, left: 0 });
+          expect(T.view.position(this.T.view.jcanvas)).to(equal, { top: 0, left: 0 });
         });
 
         describe("event", function() {
           it("should return position of event relative to canvas position", function() {
             var event = mockEvent(100, 200);
-            expect(T.view.position(event)).to(equal, { left: 100, top: 200 });
+            expect(T.view.position(T.view.jcanvas, event)).to(equal, { left: 100, top: 200 });
           });
         });
 
