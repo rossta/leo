@@ -1,58 +1,88 @@
 Screw.Unit(function() {
 
-  describe("Leo.View", function() {
+  before(function() {
+    T = {};
+    fixture($('<div id="leo"></div>'));
+    T.leo = new Leo();
+  });
 
+  after(function() {
+    Leo.tearDown();
+    T.leo = null;
+    cleanFixtures();
+  });
+
+  describe("Leo.Toolbar", function() {
     before(function() {
-      T = {};
-      fixture($('<div id="leo"></div>'));
+      T.toolbar = new Leo.Toolbar();
     });
-
     after(function() {
-      T.leo =
-      T.lCanvas = null;
-      Leo.tearDown();
-      cleanFixtures();
+      T.toolbar = null;
     });
 
-    describe("events", function() {
-      
-      before(function() {
-        T.leo = new Leo();
-        T.lCanvas = new Leo.View(T.leo);
-        mock(T.lCanvas).stub("position").and_return({ top: 100, left: 200 });
+    describe("self.create", function() {
+      it("should return a new Leo.View", function() {
+        expect(Leo.Toolbar.create(T.leo)).to(be_instance_of, Leo.Toolbar);
       });
-      
-      it("should notify leo of events: click dblclick mousemove mousedown mouseup keyup keydown", function() {
-        mock(T.leo).should_receive('notify').exactly(7, "times");
-        
-        $('#leo canvas').trigger('click');
-        $('#leo canvas').trigger('dblclick');
-        $('#leo canvas').trigger('mousemove');
-        $('#leo canvas').trigger('mousedown');
-        $('#leo canvas').trigger('mouseup');
-        $('#leo canvas').trigger('keyup');
-        $('#leo canvas').trigger('keydown');
-      });
-      
     });
+
+  });
+
+  describe("Leo.View", function() {
     
-    describe("#position", function() {
-      before(function() {
-        T.leo = new Leo();
-        T.lCanvas = new Leo.View(T.leo);
-      });
-      
-      it("should return position of canvas", function() {
-        expect(T.lCanvas.position()).to(equal, { top: 0, left: 0 });
-      });
-      
-      describe("event", function() {
-        it("should return position of event relative to canvas position", function() {
-          var event = mockEvent(100, 200);
-          expect(T.lCanvas.position(event)).to(equal, { left: 100, top: 200 });
+    describe("classMethods", function() {
+
+      describe("self.create", function() {
+        it("should return a new Leo.View", function() {
+          expect(Leo.View.create(T.leo)).to(be_instance_of, Leo.View);
         });
       });
-      
+
+    });
+    
+    describe("instanceMethods", function() {
+      before(function() {
+        T.view = new Leo.View(T.leo);
+      });
+
+      after(function() {
+        T.view = null;
+      });
+
+      describe("events", function() {
+
+        before(function() {
+          mock(T.view).stub("position").and_return({ top: 100, left: 200 });
+        });
+
+        it("should notify leo of events: click dblclick mousemove mousedown mouseup keyup keydown", function() {
+          mock(T.leo).should_receive('notify').exactly(7, "times");
+          $('#leo canvas').trigger('click');
+          $('#leo canvas').trigger('dblclick');
+          $('#leo canvas').trigger('mousemove');
+          $('#leo canvas').trigger('mousedown');
+          $('#leo canvas').trigger('mouseup');
+          $('#leo canvas').trigger('keyup');
+          $('#leo canvas').trigger('keydown');
+        });
+
+      });
+
+      describe("#position", function() {
+
+        it("should return position of canvas", function() {
+          expect(T.view.position()).to(equal, { top: 0, left: 0 });
+        });
+
+        describe("event", function() {
+          it("should return position of event relative to canvas position", function() {
+            var event = mockEvent(100, 200);
+            expect(T.view.position(event)).to(equal, { left: 100, top: 200 });
+          });
+        });
+
+      });
+
     });
 
   });
