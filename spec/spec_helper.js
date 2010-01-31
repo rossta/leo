@@ -31,10 +31,14 @@ require(DIR.VENDOR, "base/base.js");
 require(DIR.LIB, "leo.js");
 require(DIR.LIB, "leo.modules.js");
 require(DIR.LIB, "leo.handlers.js");
+require(DIR.LIB, "leo.commands.js");
 require(DIR.LIB, "leo.graphics.js");
 require(DIR.LIB, "leo.nodes.js");
+require(DIR.LIB, "leo.builder.js");
+require(DIR.LIB, "leo.stack.js");
 
 // Specs
+require("leo.commands.spec.js");
 require("leo.nodes.spec.js");
 require("leo.graphics.spec.js");
 require("leo.modules.spec.js");

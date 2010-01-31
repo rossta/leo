@@ -1,23 +1,33 @@
 Screw.Unit(function() {
-  
+
   describe("Leo.PathSegment", function() {
-    it("should have type, x, y, r, x1, y1", function() {
+    it("should set segment values", function() {
       var segment = new Leo.PathSegment({
         type: "curve",
         x: 1,
         y: 2,
-        r: 3,
+        r: [3],
         x1: 4,
-        y1: 5
+        y1: 5,
+        c1x: 6,
+        c1y: 7,
+        c2x: 8,
+        c2y: 9,
+        length: 10
       });
       expect(segment.x).to(equal, 1);
       expect(segment.y).to(equal, 2);
-      expect(segment.r).to(equal, 3);
+      expect(segment.r).to(equal, [3]);
       expect(segment.x1).to(equal, 4);
       expect(segment.y1).to(equal, 5);
+      expect(segment.c1x).to(equal, 6);
+      expect(segment.c1y).to(equal, 7);
+      expect(segment.c2x).to(equal, 8);
+      expect(segment.c2y).to(equal, 9);
+      expect(segment.length).to(equal, 10);
     });
   });
-  
+
   describe("Leo.PathNode", function() {
     it("should have sx, sy, dx, dy, segments, closed, points, shadow", function() {
       var node = new Leo.PathNode(5, 6);
@@ -31,7 +41,7 @@ Screw.Unit(function() {
       expect(node.shadow).to(equal, false);
       expect(node.type).to(equal, "PathNode");
     });
-    
+
     it("should have inherit base class node properties as well", function() {
       var node = new Leo.PathNode();
       expect(node.rect).to(be_instance_of, Leo.Rectangle);
@@ -42,7 +52,7 @@ Screw.Unit(function() {
       expect(node.parent).to(be_null);
       expect(node.children).to(equal, []);
     });
-    
+
     describe("#lineTo", function() {
       it("should add segment to node with given x, y", function() {
         var node = new Leo.PathNode(1, 2);
@@ -52,14 +62,14 @@ Screw.Unit(function() {
         expect(node.segments[0].y).to(equal, 4);
       });
     });
-    
+
     describe("#close", function() {
       it("should set node to closed", function() {
         var node = new Leo.PathNode();
         expect(node.close().closed).to(be_true);
       });
     });
-    
+
     describe("#save", function() {
       it("should return a json object of node properties", function() {
         var node = new Leo.PathNode(2,3),
@@ -88,7 +98,7 @@ Screw.Unit(function() {
         });
       });
     });
-    
+
     describe("#load", function() {
       it("should create path node from json and load children", function() {
         var node = new Leo.PathNode(), child = { type: "Node", children: [] },
@@ -206,7 +216,7 @@ Screw.Unit(function() {
         node.format();
       });
     });
-    
+
   });
 
 });
