@@ -1,32 +1,41 @@
 Screw.Unit(function() {
 
-  describe("Leo.PathSegment", function() {
+  describe("Leo.Segment", function() {
     it("should set segment values", function() {
-      var segment = new Leo.PathSegment({
-        type: "curve",
+      var segment = new Leo.Segment({
+        type: "Line",
         x: 1,
         y: 2,
         r: [3],
-        x1: 4,
-        y1: 5,
-        c1x: 6,
-        c1y: 7,
-        c2x: 8,
-        c2y: 9,
         length: 10
       });
       expect(segment.x).to(equal, 1);
       expect(segment.y).to(equal, 2);
       expect(segment.r).to(equal, [3]);
-      expect(segment.x1).to(equal, 4);
-      expect(segment.y1).to(equal, 5);
-      expect(segment.c1x).to(equal, 6);
-      expect(segment.c1y).to(equal, 7);
-      expect(segment.c2x).to(equal, 8);
-      expect(segment.c2y).to(equal, 9);
       expect(segment.length).to(equal, 10);
     });
   });
+  
+  describe("Leo.Curve", function() {
+    it("should set control points", function() {
+      var segment = new Leo.Curve({
+        type: "Curve",
+        x: 1,
+        y: 2,
+        cpx1: 3,
+        cpy1: 4,
+        cpx2: 5,
+        cpy2: 6
+      });
+      expect(segment.x).to(equal, 1);
+      expect(segment.y).to(equal, 2);
+      expect(segment.type).to(equal, "Curve");
+      expect(segment.cpx1).to(equal, 3);
+      expect(segment.cpy1).to(equal, 4);
+      expect(segment.cpx2).to(equal, 5);
+      expect(segment.cpy2).to(equal, 6);
+    });
+  })
 
   describe("Leo.PathNode", function() {
     it("should have sx, sy, dx, dy, segments, closed, points, shadow", function() {
@@ -119,7 +128,7 @@ Screw.Unit(function() {
           segments: [segment]
         };
 
-        mock(Leo.PathSegment).stub("load").and_return("segment");
+        mock(Leo.Segment).stub("load").and_return("segment");
         mock(Leo.IdentityMatrix).stub("load").and_return("matrix");
         node.load(s);
         expect(node).to(be_instance_of, Leo.PathNode);
@@ -214,6 +223,15 @@ Screw.Unit(function() {
         node.children = [ child ];
         child.should_receive("format").exactly("once");
         node.format();
+      });
+    });
+    
+    describe("#addChild", function() {
+      it("should add child to root", function() {
+        var node = new Leo.Node(), child = mock(Leo.Node);
+        expect(node.children).to(be_empty);
+        node.addChild(child);
+        expect(node.children).to(equal, [ child ]);
       });
     });
 
