@@ -4,26 +4,22 @@ Screw.Unit(function() {
 
     before(function() {
       fixture($('<div id="leo"></div>'));
+      Leo.init();
     });
     
-    after(cleanFixtures);
+    after(function() {
+      Leo.tearDown();
+      cleanFixtures(); 
+    });
     
     describe("instanceMethods", function() {
-      before(function() {
-        this.leo = Leo.init();
-      });
-
-      after(function() {
-        this.leo = null;
-        Leo.tearDown();
-      });
 
       describe('#execute', function() {
 
         it("should call execute command on command stack", function() {
           var command = mock(Leo.Command);
-          mock(this.leo.commandStack).should_receive("execute").with_arguments(command).exactly("once");
-          this.leo.execute(command);
+          mock($leo.commandStack).should_receive("execute").with_arguments(command).exactly("once");
+          $leo.execute(command);
         });
 
       });
@@ -31,10 +27,6 @@ Screw.Unit(function() {
     });
 
     describe('self.init', function() {
-
-      after(function() {
-        Leo.tearDown();
-      });
 
       it("should create a new Leo instance", function() {
         var leo = Leo.init();

@@ -3,18 +3,17 @@ Screw.Unit(function() {
   before(function() {
     T = {};
     fixture($('<div id="leo"></div>'));
-    T.leo = new Leo();
+    $leo = new Leo();
   });
 
   after(function() {
-    Leo.tearDown();
-    T.leo = null;
+    $leo = null;
     cleanFixtures();
   });
 
   describe("Leo.Toolbar", function() {
     before(function() {
-      T.toolbar = new Leo.Toolbar(T.leo);
+      T.toolbar = new Leo.Toolbar();
     });
     after(function() {
       T.toolbar = null;
@@ -22,18 +21,17 @@ Screw.Unit(function() {
     
     describe("constructor", function() {
       it("should have leo, handler, buttons", function(){
-        expect(T.toolbar.leo).to(equal, T.leo);
         expect(T.toolbar.handler).to(be_instance_of, Leo.Handler);
         expect(T.toolbar.buttons).to(be_empty);
       });
       it("should append toolbar to leo", function() {
-        expect(T.leo.container).to(contain_selector, "#leo_toolbar");
+        expect($leo.container).to(contain_selector, "#leo_toolbar");
       });
     });
 
     describe("self.create", function() {
       it("should return a new Leo.View", function() {
-        expect(Leo.Toolbar.create(T.leo)).to(be_instance_of, Leo.Toolbar);
+        expect(Leo.Toolbar.create()).to(be_instance_of, Leo.Toolbar);
       });
     });
 
@@ -46,7 +44,7 @@ Screw.Unit(function() {
       describe("self.create", function() {
 
         it("should return a new Leo.View", function() {
-          expect(Leo.View.create(T.leo)).to(be_instance_of, Leo.View);
+          expect(Leo.View.create()).to(be_instance_of, Leo.View);
         });
 
       });
@@ -55,7 +53,7 @@ Screw.Unit(function() {
 
     describe("instanceMethods", function() {
       before(function() {
-        T.view = new Leo.View(T.leo);
+        T.view = new Leo.View();
       });
 
       after(function() {
@@ -70,7 +68,7 @@ Screw.Unit(function() {
         });
 
         it("should notify leo of events: click dblclick mousemove mousedown mouseup keyup keydown", function() {
-          mock(T.leo).should_receive('notify').exactly(7, "times");
+          mock($leo).should_receive('notify').exactly(7, "times");
           $('#leo canvas').trigger('click');
           $('#leo canvas').trigger('dblclick');
           $('#leo canvas').trigger('mousemove');
