@@ -5,8 +5,8 @@ Screw.Unit(function() {
     before(function() {
       this.node = mock(Leo.Node);
       this.view = mock(Leo.View);
-      stub(this.view, "update");
       stub(this.view, "add");
+      stub(this.view, "update");
       stub(this.view, "remove");
     });
     after(function() {

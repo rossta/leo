@@ -15,19 +15,16 @@ Screw.Unit(function() {
     describe("instanceMethods", function() {
 
       describe('#execute', function() {
-
         it("should call execute command on command stack", function() {
           var command = mock(Leo.Command);
           mock($leo.commandStack).should_receive("execute").with_arguments(command).exactly("once");
           $leo.execute(command);
         });
-
       });
       
     });
 
     describe('self.init', function() {
-
       it("should create a new Leo instance", function() {
         expect($leo).to(be_instance_of, Leo);
       });
@@ -43,7 +40,6 @@ Screw.Unit(function() {
       it("should create a new Leo.Toolbar", function() {
         expect($leo.module('toolbar')).to(be_instance_of, Leo.Toolbar);
       });
-
     });
 
   });
