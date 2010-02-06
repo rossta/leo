@@ -1,7 +1,6 @@
 Screw.Unit(function() {
 
   before(function() {
-    T = {};
     fixture($('<div id="leo"></div>'));
     $leo = new Leo();
   });
@@ -13,16 +12,16 @@ Screw.Unit(function() {
 
   describe("Leo.Toolbar", function() {
     before(function() {
-      T.toolbar = new Leo.Toolbar();
+      this.toolbar = new Leo.Toolbar();
     });
     after(function() {
-      T.toolbar = null;
+      this.toolbar = null;
     });
 
     describe("constructor", function() {
       it("should have leo, handler, buttons", function(){
-        expect(T.toolbar.handler).to(be_instance_of, Leo.Handler);
-        expect(T.toolbar.buttons).to(be_empty);
+        expect(this.toolbar.handler).to(be_instance_of, Leo.Handler);
+        expect(this.toolbar.buttons).to(be_empty);
       });
       it("should append toolbar to leo", function() {
         expect($leo.container).to(contain_selector, "#leo_toolbar");
