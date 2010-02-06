@@ -6,6 +6,8 @@ Screw.Unit(function() {
       var node = mock(Leo.Node), view = mock(Leo.View), command = new Leo.EllipseNodeCommand(view);
       expect(command.view).to(equal, view);
     });
+    
+    
   });
 
 });
