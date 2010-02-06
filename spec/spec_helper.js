@@ -1,9 +1,19 @@
-var require = function() {
+var requests = 0,
+responses = 0,
+require = function() {
+  requests += 1;
+
   var src = "", element = document.createElement("script");
   for (var i = 0; i < arguments.length; i++) { src += arguments[i]; }
   element.setAttribute("type", "text/javascript");
   element.setAttribute("src", src);
+  element.onload = function() { responses += 1; };
   document.getElementsByTagName("head")[0].appendChild(element);
+},
+executeTests = function() {
+  console.log("Requests: " + requests + ", Responses: " + responses);
+  if (requests > responses) setTimeout(executeTests, 100);
+  else $(window).load();
 },
 
 DIR = { VENDOR: "../vendor/", LIB: "../lib/" };
@@ -43,3 +53,5 @@ require("leo.nodes.spec.js");
 require("leo.graphics.spec.js");
 require("leo.modules.spec.js");
 require("leo.spec.js");
+
+executeTests();

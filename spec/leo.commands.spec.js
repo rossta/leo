@@ -1,11 +1,9 @@
 Screw.Unit(function() {
 
-  describe("Leo.NewNodeCommand", function() {
+  describe("Leo.EllipseNodeCommand", function() {
 
-    it("should set node and view", function() {
-      var node = mock(Leo.Node), view = mock(Leo.View), command = new Leo.NewNodeCommand(node, view);
-      
-      expect(command.node).to(equal, node);
+    it("should set view", function() {
+      var node = mock(Leo.Node), view = mock(Leo.View), command = new Leo.EllipseNodeCommand(view);
       expect(command.view).to(equal, view);
     });
   });
