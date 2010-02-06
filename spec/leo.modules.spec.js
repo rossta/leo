@@ -39,16 +39,10 @@ Screw.Unit(function() {
 
   describe("Leo.View", function() {
 
-    describe("classMethods", function() {
-
-      describe("self.create", function() {
-
-        it("should return a new Leo.View", function() {
-          expect(Leo.View.create()).to(be_instance_of, Leo.View);
-        });
-
+    describe("self.create", function() {
+      it("should return a new Leo.View", function() {
+        expect(Leo.View.create()).to(be_instance_of, Leo.View);
       });
-
     });
 
     describe("instanceMethods", function() {
@@ -61,7 +55,6 @@ Screw.Unit(function() {
       });
 
       describe("events", function() {
-
         before(function() {
           mock(this.view).stub("position").and_return({ top: 100, left: 200 });
           this.view.init();
@@ -77,7 +70,6 @@ Screw.Unit(function() {
           $('#leo canvas').trigger('keyup');
           $('#leo canvas').trigger('keydown');
         });
-
       });
 
       describe("#position", function() {
@@ -147,6 +139,5 @@ Screw.Unit(function() {
       });
 
     });
-
   });
 });
