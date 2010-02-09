@@ -36,7 +36,7 @@ Screw.Unit(function() {
       it("should create a new Leo.View", function() {
         expect($leo.module('view')).to(be_instance_of, Leo.View);
       });
-
+      
       it("should create a new Leo.Toolbar", function() {
         expect($leo.module('toolbar')).to(be_instance_of, Leo.Toolbar);
       });
