@@ -44,29 +44,33 @@ Screw.Unit(function() {
     });
   });
   
-  // describe("Leo.CommandStack", function() {
-  //   
-  //   it("should define commands", function() {
-  //     expect(new Leo.CommandStack().commands).to(be_empty);
-  //   });
-  //   
-  //   describe("#execute", function() {
-  //     it("should execute given command and add command to stack", function() {
-  //       var command = mock(Leo.Command), stack = new Leo.CommandStack();
-  //       command.should_receive("execute").exactly("once");
-  //       stack.execute(command);
-  //       expect(stack).to(have_length, 1);
-  //     });
-  //   });
-  //   
-  //   describe("#undo", function() {
-  //     it("should undo given command and pop from stack", function() {
-  //       var command = mock(Leo.Command), stack = new Leo.CommandStack();
-  //       stack.commands.push(command);
-  //       command.should_receive("undo").exactly("once");
-  //       stack.execute(command);
-  //       expect(stack).to(be_empty);
-  //     });
-  //   });
-  // });
+  describe("Leo.CommandStack", function() {
+    
+    it("should define commands", function() {
+      expect(new Leo.CommandStack().commands).to(be_empty);
+    });
+    
+    describe("#execute", function() {
+      it("should execute given command and add command to stack", function() {
+        var command = mock(Leo.Command), stack = new Leo.CommandStack();
+        command.should_receive("execute").exactly("once");
+        stack.execute(command);
+        expect(stack.commands).to(have_length, 1);
+      });
+    });
+    
+    describe("#undo", function() {
+      it("should undo given command and pop from stack", function() {
+        var command = mock(Leo.Command), stack = new Leo.CommandStack();
+        command.stub("execute").and_return(command);
+        stack.commands.push(command);
+        command.should_receive("undo").exactly("once");
+        stack.undo();
+        expect(stack.commands).to(be_empty);
+      });
+      it("should no-op when stack empty", function() {
+        new Leo.CommandStack().undo(); //should not throw error
+      });
+    });
+  });
 });
