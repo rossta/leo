@@ -45,7 +45,6 @@ require(DIR.LIB, "leo.commands.js");
 require(DIR.LIB, "leo.graphics.js");
 require(DIR.LIB, "leo.nodes.js");
 require(DIR.LIB, "leo.builder.js");
-require(DIR.LIB, "leo.stack.js");
 
 // Specs
 require("leo.commands.spec.js");

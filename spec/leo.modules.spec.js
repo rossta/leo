@@ -19,9 +19,10 @@ Screw.Unit(function() {
     });
 
     describe("constructor", function() {
-      it("should have leo, handler, buttons", function(){
+      it("should have handler, id, fn hash", function(){
         expect(this.toolbar.handler).to(be_instance_of, Leo.Handler);
-        expect(this.toolbar.buttons).to(be_empty);
+        expect(this.toolbar.id).to(equal, "leo_toolbar");
+        expect(this.toolbar.fn).to(be_instance_of, Object);
       });
       it("should append toolbar to leo", function() {
         expect($leo.container).to(contain_selector, "#leo_toolbar");

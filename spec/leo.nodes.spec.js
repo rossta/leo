@@ -6,12 +6,10 @@ Screw.Unit(function() {
         type: "Line",
         x: 1,
         y: 2,
-        r: [3],
         length: 10
       });
       expect(segment.x).to(equal, 1);
       expect(segment.y).to(equal, 2);
-      expect(segment.r).to(equal, [3]);
       expect(segment.length).to(equal, 10);
     });
   });
@@ -35,7 +33,7 @@ Screw.Unit(function() {
       expect(segment.cpx2).to(equal, 5);
       expect(segment.cpy2).to(equal, 6);
     });
-  })
+  });
 
   describe("Leo.PathNode", function() {
     it("should have sx, sy, dx, dy, segments, closed, points, shadow", function() {

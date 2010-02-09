@@ -17,7 +17,7 @@ Screw.Unit(function() {
       describe('#execute', function() {
         it("should call execute command on command stack", function() {
           var command = mock(Leo.Command);
-          mock($leo.commandStack).should_receive("execute").with_arguments(command).exactly("once");
+          mock($leo.stack).should_receive("execute").with_arguments(command).exactly("once");
           $leo.execute(command);
         });
       });
