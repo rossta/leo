@@ -3,6 +3,16 @@ Screw.Unit(function() {
     T = {};
   });
 
+  describe("Leo.Position", function() {
+
+    it("should return left, top", function() {
+      var pos = new Leo.Position(2, 4);
+      expect(pos.left).to(equal, 2);
+      expect(pos.top).to(equal, 4);
+    });
+
+  });
+
   describe("Leo.Point", function() {
 
     it("should return x, y", function() {
