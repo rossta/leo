@@ -13,7 +13,7 @@ Screw.Unit(function() {
       expect(segment.length).to(equal, 10);
     });
   });
-  
+
   describe("Leo.Curve", function() {
     it("should set control points", function() {
       var segment = new Leo.Curve({
@@ -60,6 +60,28 @@ Screw.Unit(function() {
       expect(node.children).to(equal, []);
     });
 
+    describe("#contains", function() {
+      it("should return true if given position is within bounds of node's segments", function() {
+        var node = new Leo.PathNode(10, 10),
+        in1 = new Leo.Position(10, 15),
+        in2 = new Leo.Position(15, 15),
+        in3 = new Leo.Position(7, 18),
+        out1 = new Leo.Position(10, 9),
+        out2 = new Leo.Position(16, 15),
+        out3 = new Leo.Position(10, 21);
+        node.lineTo(15, 15);
+        node.lineTo(10, 20);
+        node.lineTo(5, 15);
+        node.lineTo(10, 10);
+        expect(node.contains(out1)).to(be_false);
+        expect(node.contains(out2)).to(be_false);
+        expect(node.contains(out3)).to(be_false);
+        expect(node.contains(in1)).to(be_true);
+        expect(node.contains(in2)).to(be_true);
+        expect(node.contains(in3)).to(be_true);
+      });
+    });
+    
     describe("#lineTo", function() {
       it("should add segment to node with given x, y", function() {
         var node = new Leo.PathNode(1, 2);
@@ -223,7 +245,7 @@ Screw.Unit(function() {
         node.format();
       });
     });
-    
+
     describe("#addChild", function() {
       it("should add child to root", function() {
         var node = new Leo.Node(), child = mock(Leo.Node);
